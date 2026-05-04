@@ -63,7 +63,7 @@ const ParameterPanel = ({
         tune: tune
       };
 
-      const res = await axios.post('/api/train', payload);
+      const res = await axios.post('http://localhost:8000/api/train', payload);
       setTrainingResults(res.data);
       setActiveTab('visualization');
     } catch (err) {

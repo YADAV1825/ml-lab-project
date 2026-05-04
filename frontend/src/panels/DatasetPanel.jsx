@@ -7,33 +7,11 @@ const DatasetPanel = ({ datasetId, setDatasetId, datasetInfo, setDatasetInfo }) 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const handleUpload = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    const formData = new FormData();
-    formData.append('file', file);
-
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await axios.post('/api/dataset/upload', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      });
-      setDatasetId(res.data.dataset_id);
-      setDatasetInfo(res.data);
-    } catch (err) {
-      setError(err.response?.data?.detail || err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const loadBuiltIn = async (name) => {
     setLoading(true);
     setError(null);
     try {
-      const res = await axios.get(`/api/dataset/builtin/${name}`);
+      const res = await axios.get(`http://localhost:8000/api/dataset/builtin/${name}`);
       setDatasetId(res.data.dataset_id);
       setDatasetInfo({ ...res.data, name: name });
     } catch (err) {

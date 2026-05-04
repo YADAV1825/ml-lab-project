@@ -72,7 +72,7 @@ const AIInsightPanel = ({ datasetInfo, selectedModel, trainingResults }) => {
         { role: 'user', content: prompt }
       ];
 
-      const res = await axios.post('/api/chat', { messages: apiMessages });
+      const res = await axios.post('http://localhost:8000/api/chat', { messages: apiMessages });
       setMessages([...newMessages, { role: 'assistant', content: res.data.reply }]);
     } catch (error) {
       setMessages([...newMessages, { role: 'assistant', content: `⚠️ Could not auto-analyze: ${error.message}` }]);
@@ -100,7 +100,7 @@ const AIInsightPanel = ({ datasetInfo, selectedModel, trainingResults }) => {
         ...newMessages.map(m => ({ role: m.role, content: m.content }))
       ];
 
-      const res = await axios.post('/api/chat', { messages: apiMessages });
+      const res = await axios.post('http://localhost:8000/api/chat', { messages: apiMessages });
       setMessages([...newMessages, { role: 'assistant', content: res.data.reply }]);
     } catch (error) {
       setMessages([...newMessages, { role: 'assistant', content: `Error: ${error.message}` }]);

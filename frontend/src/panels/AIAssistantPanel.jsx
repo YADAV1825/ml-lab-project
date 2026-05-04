@@ -39,7 +39,7 @@ const AIAssistantPanel = ({ datasetInfo, selectedModel }) => {
         ...newMessages.map(m => ({ role: m.role, content: m.content }))
       ];
 
-      const res = await axios.post('/api/chat', { messages: apiMessages });
+      const res = await axios.post('http://localhost:8000/api/chat', { messages: apiMessages });
 
       setMessages([...newMessages, { role: 'assistant', content: res.data.reply }]);
     } catch (error) {
